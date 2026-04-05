@@ -1,3 +1,6 @@
+
+//the control unit handling the execution of the booth radix 4 algorithm
+
 module br4_8bits_CU
 (
 	input clk,rst_b,

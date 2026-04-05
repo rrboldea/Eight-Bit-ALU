@@ -1,3 +1,7 @@
+
+//the cell needed to output carry bits using propagate and generate for 
+//the CLA adder cell
+
 module cla_4b_carry
 (
 	input cin,

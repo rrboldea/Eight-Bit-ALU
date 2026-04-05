@@ -1,3 +1,6 @@
+
+//full adder cell, needed for implementing RCA adder and add_sub_1 cell
+
 module fac 
 (
 	input x,y,cin,

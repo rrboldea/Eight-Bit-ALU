@@ -1,3 +1,6 @@
+
+//Adder cell, providing generate and propagate signals fo the CLA adder
+
 module ac 
 (
 	input x,y,cin,

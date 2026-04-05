@@ -1,3 +1,6 @@
+
+//D-flipflop cell used in implementing all the types of registers 
+
 module d_ff
 (
 	input clk,rst_b,set_b,load,data,

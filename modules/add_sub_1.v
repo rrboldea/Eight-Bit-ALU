@@ -1,3 +1,7 @@
+
+//used for implementing counter cell, capable of adding 1 or subtracting 1 
+//from input
+
 module add_sub_1 #(parameter size=8)
 (
 	input add_sub,

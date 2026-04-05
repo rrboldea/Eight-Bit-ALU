@@ -1,6 +1,8 @@
 
 //sterge state[2] pt ca putem sa dam load si in Q si in M in acelasi ciclu de tact
 
+//multiplier cell based on booth radix 4 algorithm
+
 module br4_8bits 
 (
 	input clk,rst_b,

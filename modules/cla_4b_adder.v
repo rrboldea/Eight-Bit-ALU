@@ -1,3 +1,6 @@
+
+//carry lookahead adder cell on 4 bits
+
 module cla_4b_adder
 (
 	input cin,

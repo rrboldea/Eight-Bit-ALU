@@ -1,3 +1,6 @@
+
+//simple register, capable of loading data
+
 module register #(parameter size=1)
 (
 	input clk,rst_b,load,

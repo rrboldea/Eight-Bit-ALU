@@ -1,3 +1,7 @@
+
+//general shift register, capable of loading and shifting data any amount 
+//of bits
+
 module rshiftReg #(parameter bits_shift=2, parameter size=8)
 (
 	input clk,rst_b,load,rshift,

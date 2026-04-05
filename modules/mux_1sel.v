@@ -1,3 +1,6 @@
+
+//multiplexor cell
+
 module mux_1sel #(parameter size=1)
 (
 	input sel,

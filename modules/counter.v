@@ -1,3 +1,6 @@
+
+//counter cell, capable of counting up or down by 1
+
 module counter #(parameter size=8)
 (
 	input clk,rst_b,c_up,c_down,

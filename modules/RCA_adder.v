@@ -1,3 +1,6 @@
+
+//ripple carry adder, the most basic adder
+
 module RCA_adder #(parameter size=8)
 (
 	input cin,

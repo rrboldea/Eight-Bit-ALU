@@ -1,3 +1,7 @@
+
+//General adder, composed of as many cells of 4bit CLA adders as possible for efficiency
+//if the size is not a multiple of 4, the remainder is processed by a RCA adder cell
+
 module adder #(parameter size=9)
 (
 	input cin,
