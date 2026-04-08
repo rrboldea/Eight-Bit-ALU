@@ -18,7 +18,7 @@ wire [3:0] g,p;
 
 genvar i;
 generate
-	for(i=0;i<4;i=i+1) begin
+	for(i=0;i<4;i=i+1) begin: loop
 		ac ac_i
 		(
 			.x(x[i]),
@@ -36,7 +36,7 @@ cla_4b_carry cla_4b_carry
 	.cin(carry[0]),
 	.g(g),
 	.p(p),
-	.carry({carry[4:1]})
+	.carry({carry[4],carry[3],carry[2],carry[1]})
 );
 
 endmodule

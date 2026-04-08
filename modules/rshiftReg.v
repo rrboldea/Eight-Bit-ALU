@@ -17,7 +17,7 @@ wire w[size-1:0];
 
 genvar i;
 generate
-	for(i=0;i<bits_shift;i=i+1) begin
+	for(i=0;i<bits_shift;i=i+1) begin: loop1
 		mux_1sel #(.size(1)) mux_in
 		(
 			.sel(load),
@@ -29,7 +29,7 @@ generate
 endgenerate
 
 generate
-	for(i=0;i<size-bits_shift;i=i+1) begin
+	for(i=0;i<size-bits_shift;i=i+1) begin: loop2
 		mux_1sel #(.size(1)) mux_i
 		(
 			.sel(load),
@@ -41,7 +41,7 @@ generate
 endgenerate
 
 generate
-	for(i=0;i<size;i=i+1) begin
+	for(i=0;i<size;i=i+1) begin: loop3
 		d_ff d_ff_i
 		(
 			.clk(clk),

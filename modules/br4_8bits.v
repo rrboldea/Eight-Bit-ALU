@@ -104,7 +104,7 @@ mux_1sel #(.size(9)) MUX
 
 genvar i;
 generate
-	for(i=0;i<9;i=i+1) begin
+	for(i=0;i<9;i=i+1) begin: loop
 		assign y[i]=q_MUX[i] ^ c[3];
 	end
 endgenerate

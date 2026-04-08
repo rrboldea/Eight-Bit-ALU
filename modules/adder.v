@@ -16,7 +16,7 @@ assign cout=carry[size/4+1];
 
 genvar i;
 generate
-	for(i=0;i<size/4;i=i+1) begin
+	for(i=0;i<size/4;i=i+1) begin: loop
 		cla_4b_adder cla_4b_adder_i
 		(
 			.cin(carry[i]),

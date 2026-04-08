@@ -21,7 +21,7 @@ wire [size-1:1] y;
 genvar i;
 
 generate 
-	for(i=1;i<size;i=i+1) begin
+	for(i=1;i<size;i=i+1) begin: loop1
 		mux_1sel mux_i
 		(
 			.sel(add_sub),
@@ -33,7 +33,7 @@ generate
 endgenerate
 
 generate
-	for(i=1;i<size;i=i+1) begin
+	for(i=1;i<size;i=i+1) begin: loop2
 		fac fac_i
 		(
 			.x(x[i]),

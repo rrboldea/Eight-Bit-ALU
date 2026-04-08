@@ -10,7 +10,7 @@ module register #(parameter size=1)
 
 genvar i;
 generate
-	for(i=0;i<size;i=i+1) begin
+	for(i=0;i<size;i=i+1) begin: loop
 		d_ff d_ff_i
 		(
 			.clk(clk),

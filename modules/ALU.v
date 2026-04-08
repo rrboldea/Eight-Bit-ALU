@@ -17,7 +17,7 @@ assign ovrflow=(x[7] ^ z_ADD[7]) & (y_ADD[7] ^ z_ADD[7]);
 
 genvar i;
 generate
-	for(i=0;i<8;i=i+1) begin
+	for(i=0;i<8;i=i+1) begin: loop
 		assign y_ADD[i]=y[i] ^ SUB;	
 	end
 endgenerate

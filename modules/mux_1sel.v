@@ -10,7 +10,7 @@ module mux_1sel #(parameter size=1)
 
 genvar i;
 generate
-	for(i=0;i<size;i=i+1) begin
+	for(i=0;i<size;i=i+1) begin: loop
 		assign q[i]=(value1[i] & sel) | (value0[i] & (~sel));
 	end
 endgenerate

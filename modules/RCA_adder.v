@@ -15,7 +15,7 @@ assign cout=carry[size];
 
 genvar i;
 generate
-	for(i=0;i<size;i=i+1) begin
+	for(i=0;i<size;i=i+1) begin: loop
 		fac fac_i
 		(
 			.x(x[i]),

@@ -76,7 +76,7 @@ d_ff d_ff_0
 );
 genvar i;
 generate
-	for(i=1;i<=9;i=i+1) begin
+	for(i=1;i<=9;i=i+1) begin: loop
 		d_ff d_ff_i
 		(
 			.clk(clk),
