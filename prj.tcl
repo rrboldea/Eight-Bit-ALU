@@ -34,6 +34,7 @@ set_location_assignment PIN_A7 -to rst_b
 # added buttons
 set_location_assignment -to ADD_b PIN_AA2
 set_location_assignment -to SUB_b PIN_AB2
+set_location_assignment -to MULT_b PIN_Y3
 
 #set_location_assignment -to AND PIN_AB5
 #set_location_assignment -to OR PIN_AB6
@@ -49,17 +50,27 @@ set_location_assignment PIN_B12 -to data[5]
 set_location_assignment PIN_A13 -to data[6]
 set_location_assignment PIN_A14 -to data[7]
 
-# leds
-set_location_assignment PIN_A8 -to q[0]
-set_location_assignment PIN_A9 -to q[1]
-set_location_assignment PIN_A10 -to q[2]
-set_location_assignment PIN_B10 -to q[3]
-set_location_assignment PIN_D13 -to q[4]
-set_location_assignment PIN_C13 -to q[5]
-set_location_assignment PIN_E14 -to q[6]
-set_location_assignment PIN_D14 -to q[7]
+# added leds
+set_location_assignment PIN_AB5 -to q[0]
+set_location_assignment PIN_AB6 -to q[1]
+set_location_assignment PIN_AB7 -to q[2]
+set_location_assignment PIN_AB8 -to q[3]
+set_location_assignment PIN_AB9 -to q[4]
+set_location_assignment PIN_Y10 -to q[5]
+set_location_assignment PIN_AA11 -to q[6]
+set_location_assignment PIN_AA12 -to q[7]
 
-set_location_assignment PIN_B11 -to DONE
+set_location_assignment PIN_AB17 -to q[8]
+set_location_assignment PIN_AA17 -to q[9]
+set_location_assignment PIN_AB19 -to q[10]
+set_location_assignment PIN_AA19 -to q[11]
+set_location_assignment PIN_Y19 -to q[12]
+set_location_assignment PIN_AB20 -to q[13]
+set_location_assignment PIN_AB21 -to q[14]
+set_location_assignment PIN_AA20 -to q[15]
+
+# on-board leds
+set_location_assignment PIN_A8 -to DONE
 
 load_package flow
 execute_flow -compile

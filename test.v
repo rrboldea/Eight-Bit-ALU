@@ -1,20 +1,21 @@
 module test
 (
 	input clk,rst_b,ld_x_y_b,
-	input ADD_b,SUB_b,
+	input ADD_b,SUB_b,MULT_b,
 	input [7:0] data,
 	output DONE,
-	output [7:0] q
+	output [15:0] q
 );
 
 //buttons on de10-lite are pulled HIGH, so we have to reverse the logical value
-wire ADD,SUB,ld_x_y;
+wire ADD,SUB,MULT,ld_x_y;
 
 assign ADD=~ADD_b;
 assign SUB=~SUB_b;
+assign MULT=~MULT_b;
 assign ld_x_y=~ld_x_y_b;
 
-wire ADD_sync,SUB_sync,ld_x_y_sync;
+wire ADD_sync,SUB_sync,MULT_sync,ld_x_y_sync;
 
 synchronizer syncADD
 (
@@ -30,6 +31,13 @@ synchronizer syncSUB
 	.signal_out(SUB_sync)
 );
 
+synchronizer syncMULT
+(
+	.clk(clk),
+	.signal_in(MULT),	
+	.signal_out(MULT_sync)
+);
+
 synchronizer sync_ld_x_y
 (
 	.clk(clk),
@@ -37,7 +45,7 @@ synchronizer sync_ld_x_y
 	.signal_out(ld_x_y_sync)
 );
 
-wire ADD_posedge,SUB_posedge,ld_x_y_posedge;
+wire ADD_posedge,SUB_posedge,MULT_posedge,ld_x_y_posedge;
 
 pos_edge posADD
 (
@@ -53,6 +61,13 @@ pos_edge posSUB
 	.signal_out(SUB_posedge)
 );
 
+pos_edge posMULT
+(
+	.clk(clk),
+	.signal_in(MULT_sync),	
+	.signal_out(MULT_posedge)
+);
+
 pos_edge pos_ld_x_y
 (
 	.clk(clk),
@@ -61,9 +76,6 @@ pos_edge pos_ld_x_y
 );
 
 wire [7:0] x,y;
-wire [15:0] out;
-
-assign q={out[7:0]};
 
 test_load_x_y load
 (
@@ -81,11 +93,11 @@ ALU alu
 	.rst_b(rst_b),
 	.ADD(ADD_posedge),
 	.SUB(SUB_posedge),
-	.MULT(1'b0),
+	.MULT(MULT_posedge),
 	.x(x),
 	.y(y),
 	.DONE(DONE),
-	.q(out)
+	.q(q)
 );
 
 endmodule
