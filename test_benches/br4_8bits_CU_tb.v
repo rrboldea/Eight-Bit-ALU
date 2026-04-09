@@ -4,7 +4,7 @@ reg clk,rst_b,BEGIN;
 reg [1:-1] q;
 reg [1:0] cnt;
 //wire [10:0] state;
-wire [7:0] c;
+wire [6:0] c;
 wire END;
 
 br4_8bits_CU test
@@ -37,31 +37,28 @@ initial begin
 	BEGIN=0;
 	cnt=2'b00;
 	q[-1]=0;
-	//state 2
-	@(negedge clk) q[1:0]=2'b11;
-	//state 5
-	@(negedge clk);
-	//state 7
-	@(negedge clk) q=3'b011;
-	//state 8
-	@(negedge clk) cnt=cnt+1;
+	q[1:0]=2'b11;
 	//state 4
 	@(negedge clk);
+	//state 6
+	@(negedge clk) q=3'b011;
 	//state 7
+	@(negedge clk) cnt=cnt+1;
+	//state 3
+	@(negedge clk);
+	//state 6
 	@(negedge clk) q=3'b100;
-	//state 8
+	//state 7
+	@(negedge clk) cnt=cnt+1;
+	//state 5
+	@(negedge clk);
+	//state 6
+	@(negedge clk) q=3'b111;
+	//state 7
 	@(negedge clk) cnt=cnt+1;
 	//state 6
-	@(negedge clk);
-	//state 7
 	@(negedge clk) q=3'b111;
 	//state 8
-	@(negedge clk) cnt=cnt+1;
-	//state 7
-	@(negedge clk) q=3'b111;
-	//state 9
-	@(negedge clk);
-	//state 10
 	@(negedge clk);
 	//state 0
 end

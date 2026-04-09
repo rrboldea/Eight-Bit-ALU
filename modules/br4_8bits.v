@@ -1,6 +1,4 @@
 
-//sterge state[2] pt ca putem sa dam load si in Q si in M in acelasi ciclu de tact
-
 //multiplier cell based on booth radix 4 algorithm
 
 module br4_8bits 
@@ -17,7 +15,7 @@ wire clk_b;
 assign clk_b=~clk;
 
 //Control signals
-wire [7:0] c;
+wire [6:0] c;
 
 //wires needed for A register
 wire rst_b_init=rst_b & (~c[0]);
@@ -49,8 +47,8 @@ rshiftReg #(.bits_shift(2),.size(9)) A_reg
 (
 	.clk(clk),
 	.rst_b(rst_b_init),
-	.load(c[2]),
-	.rshift(c[5]),
+	.load(c[1]),
+	.rshift(c[4]),
 	.in({q_A_reg[8],q_A_reg[8]}),
 	.d(d_A_reg),
 	.q(q_A_reg)
@@ -60,8 +58,8 @@ rshiftReg #(.bits_shift(2),.size(8)) Q_reg
 (
 	.clk(clk),
 	.rst_b(rst_b),
-	.load(c[1]),
-	.rshift(c[5]),
+	.load(c[0]),
+	.rshift(c[4]),
 	.in({q_A_reg[1:0]}),
 	.d(d_Q_reg),
 	.q({q_Q_reg[7:0]})
@@ -71,7 +69,7 @@ register #(.size(1)) Q_1_reg
 (
 	.clk(clk),
 	.rst_b(rst_b_init),
-	.load(c[5]),
+	.load(c[4]),
 	.data(q_Q_reg[1]),
 	.q(q_Q_reg[-1])
 );
@@ -89,14 +87,14 @@ counter #(.size(2)) CNT
 (
 	.clk(clk),
 	.rst_b(rst_b_init),
-	.c_up(c[6]),
+	.c_up(c[5]),
 	.c_down(1'b0),
 	.q(q_CNT_reg)
 );
 
 mux_1sel #(.size(9)) MUX
 (
-	.sel(c[4]),
+	.sel(c[3]),
 	.value0({q_M_reg[7],q_M_reg[7:0]}),
 	.value1({q_M_reg[7:0],1'b0}),
 	.q(q_MUX)
@@ -105,13 +103,13 @@ mux_1sel #(.size(9)) MUX
 genvar i;
 generate
 	for(i=0;i<9;i=i+1) begin: loop
-		assign y[i]=q_MUX[i] ^ c[3];
+		assign y[i]=q_MUX[i] ^ c[2];
 	end
 endgenerate
 
 adder #(.size(9)) ADD
 (
-	.cin(c[3]),
+	.cin(c[2]),
 	.x(q_A_reg),
 	.y(y),
 	.cout(),
@@ -129,7 +127,7 @@ br4_8bits_CU CU
 	.c(c)
 );
 
-assign READY=c[7];
+assign READY=c[6];
 
 mux_1sel #(.size(16)) MUX_obus
 (
