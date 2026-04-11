@@ -2,116 +2,69 @@
 
 module nrd8bits_tb;
 
-reg clk;
-reg rst_b;
+    reg clk;
+    reg rst_b;
+    reg start;
+    reg [15:0] inbus;
 
-
-reg shift_AQ;
-reg sub_M;
-reg add_M;
-reg set_Q0_1;
-reg set_Q0_0;
-reg restore;
-reg load;
-
-
-reg [7:0] dividend;
-reg [7:0] divisor;
-
-
-wire sign_A;
-wire [7:0] Q_out;
-wire [8:0] A_out;
-
-
-nrd8bits uut (
-    .clk(clk),
-    .rst_b(rst_b),
-    .shift_AQ(shift_AQ),
-    .sub_M(sub_M),
-    .add_M(add_M),
-    .set_Q0_1(set_Q0_1),
-    .set_Q0_0(set_Q0_0),
-    .restore(restore),
-    .load(load),
-    .dividend(dividend),
-    .divisor(divisor),
-    .sign_A(sign_A),
-    .Q_out(Q_out),
-    .A_out(A_out)
-);
-
-
-always #5 clk = ~clk;
-
-
-initial begin
-    clk = 0;
-    rst_b = 0;
-
-    shift_AQ = 0;
-    sub_M = 0;
-    add_M = 0;
-    set_Q0_1 = 0;
-    set_Q0_0 = 0;
-    restore = 0;
-    load = 0;
-
-    dividend = 109;
-    divisor  = 12;
-
-    #20 rst_b = 1;
+    wire [16:0] outbus;
+    wire done;
 
     
-    @(negedge clk);
-    load = 1;
-    @(negedge clk);
-    load = 0;
+    nrd8bits uut (
+        .clk(clk),
+        .rst_b(rst_b),
+        .start(start),
+        .inbus(inbus),
+        .outbus(outbus),
+        .done(done)
+    );
 
     
-    repeat (8) begin
+    always #5 clk = ~clk;
+
+    
+    wire [8:0] A_out = outbus[16:8];
+    wire [7:0] Q_out = outbus[7:0];
+
+    
+    initial begin
+        clk = 0;
+        rst_b = 0;
+        start = 0;
 
         
-        @(negedge clk);
-        shift_AQ = 1;
-        @(negedge clk);
-        shift_AQ = 0;
+        inbus = {8'd10, 8'd2};
 
         
-        @(negedge clk);
-        if (sign_A == 0)
-            sub_M = 1;
-        else
-            add_M = 1;
-
-        @(negedge clk);
-        sub_M = 0;
-        add_M = 0;
+        #20;
+        rst_b = 1;
 
         
-        @(negedge clk);
-        if (sign_A == 0)
-            set_Q0_1 = 1;
-        else
-            set_Q0_0 = 1;
+        @(posedge clk);
+        start = 1;
 
-        @(negedge clk);
-        set_Q0_1 = 0;
-        set_Q0_0 = 0;
+        @(posedge clk);
+        start = 0;
 
+        
+        wait(done);
+
+        
+        @(posedge clk);
+
+        $display("\n=== FINAL RESULT ===");
+        $display("A_out (remainder) = %d", A_out);
+        $display("Q_out (quotient)  = %d", Q_out);
+        $display("done              = %b", done);
+
+        
     end
 
     
-    @(negedge clk);
-    if (sign_A == 1)
-        restore = 1;
-
-    @(negedge clk);
-    restore = 0;
-
-    
-    #10;
-    #20;
-end
+    always @(posedge clk) begin
+        $display("t=%0t | A=%0d | Q=%0d | done=%b",
+                 $time, A_out, Q_out, done);
+    end
 
 endmodule
