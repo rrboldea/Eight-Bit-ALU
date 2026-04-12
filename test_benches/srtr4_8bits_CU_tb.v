@@ -7,6 +7,7 @@ reg [3:0] b;
 reg [5:0] p;
 
 wire [13:0] c;
+wire [16:0] state;
 wire END;
 
 srtr4_8bits_CU test
@@ -19,6 +20,7 @@ srtr4_8bits_CU test
 	.b(b),
 	.p(p),
 	.c(c),
+	.state(state),
 	.END(END)
 );
 
@@ -26,7 +28,7 @@ initial begin
 	clk=0;
 	rst_b=1;
 	BEGIN=0;
-	cnt=2'b0;
+	cnt=2'b00;
 	k=3'b000;
 	b=4'b0000;
 	p=6'b000000;
@@ -41,29 +43,58 @@ initial begin
 	@(negedge clk);
 	BEGIN=0;
 	cnt=2'b00;
-	q[-1]=0;
-	q[1:0]=2'b11;
-	//state 4
+	k=3'b000;
+	b[3]=0;
+	//state 2
 	@(negedge clk);
-	//state 6
-	@(negedge clk) q=3'b011;
-	//state 7
-	@(negedge clk) cnt=cnt+1;
-	//state 3
+	b[3]=0;
+	k=k+1;
+	//state 2
 	@(negedge clk);
-	//state 6
-	@(negedge clk) q=3'b100;
-	//state 7
-	@(negedge clk) cnt=cnt+1;
-	//state 5
+	b[3]=0;
+	k=k+1;
+	//state 2
 	@(negedge clk);
-	//state 6
-	@(negedge clk) q=3'b111;
-	//state 7
+	b[3]=0;
+	k=k+1;
+	//state 2
+	@(negedge clk);
+	b=4'b1101;
+	k=k+1;
+	p=6'b000011;
+	//state 11
+	@(negedge clk);
+	p=6'b001101;
+	//state 12
 	@(negedge clk) cnt=cnt+1;
-	//state 6
-	@(negedge clk) q=3'b111;
+	//state 9
+	@(negedge clk);
+	//state 10
+	@(negedge clk);
+	p=6'b000001;
+	//state 12
+	@(negedge clk) cnt=cnt+1;
+	//state 11
+	@(negedge clk);
+	p=6'b000110;
+	//state 12
+	@(negedge clk) cnt=cnt+1;
+	//state 7
+	@(negedge clk);
 	//state 8
+	@(negedge clk);
+	p=6'b000000;
+	//state 14
+	@(negedge clk) k=k-1;
+	//state 14
+	@(negedge clk) k=k-1;
+	//state 14
+	@(negedge clk) k=k-1;
+	//state 14
+	@(negedge clk) k=k-1;
+	//state 15
+	@(negedge clk);
+	//state 16
 	@(negedge clk);
 	//state 0
 end

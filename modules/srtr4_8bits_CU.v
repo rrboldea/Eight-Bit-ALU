@@ -7,19 +7,20 @@ module srtr4_8bits_CU
 	input [3:0] b,
 	input [5:0] p,
 	output END,
-	output [13:0] c 
+	output [16:0] state,
+	output [13:0] c
 );
 
 //wire representing the state of the machine (only one bit can be of value 1, one hot),
 //wire repreenting the next value each bit will take
-wire [16:0] state
+//wire [16:0] state;
 wire [16:0] next;
 
 
 //wires signifying which redundant digit will be next, {-2,-1,0,1,2}
 wire two_b,one_b,zero,one,two;
 
-strr4_lookup_table lookup
+srtr4_lookup_table lookup
 (
 	.b(b),
 	.p(p),
@@ -44,7 +45,7 @@ assign cnt3=cnt[1] & cnt[0];
 assign s4_6_8_10_11=state[4] | state[6] | state[8] | state[10] | state[11];
 assign s4_6_8_10_11_cnt3=s4_6_8_10_11 & cnt3;
 assign s4_6_8_10_11_cnt3_p5_b=s4_6_8_10_11_cnt3 & (~p[5]);
-assign k0=(~k[1]) & (~k[0]);
+assign k0=(~k[2]) & (~k[1]) & (~k[0]);
 
 assign next[0]=(state[0] & (~BEGIN)) | (s1_2_b3_s12 & (~two_b) & (~one_b) & (~zero) & (~one) & (~two)) | state[16];
 assign next[1]=state[0] & BEGIN;
