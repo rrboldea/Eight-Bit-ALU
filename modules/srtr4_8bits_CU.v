@@ -7,13 +7,12 @@ module srtr4_8bits_CU
 	input [3:0] b,
 	input [5:0] p,
 	output END,
-	output [16:0] state,
 	output [13:0] c
 );
 
 //wire representing the state of the machine (only one bit can be of value 1, one hot),
 //wire repreenting the next value each bit will take
-//wire [16:0] state;
+wire [16:0] state;
 wire [16:0] next;
 
 

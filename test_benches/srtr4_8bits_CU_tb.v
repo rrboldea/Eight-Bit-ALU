@@ -7,7 +7,6 @@ reg [3:0] b;
 reg [5:0] p;
 
 wire [13:0] c;
-wire [16:0] state;
 wire END;
 
 srtr4_8bits_CU test
@@ -20,7 +19,6 @@ srtr4_8bits_CU test
 	.b(b),
 	.p(p),
 	.c(c),
-	.state(state),
 	.END(END)
 );
 
