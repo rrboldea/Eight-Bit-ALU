@@ -26,21 +26,21 @@ end
 
 initial begin
 	repeat(2) #10 rst_b=~rst_b;
-	{w,x}=3825;
-	y=72;
 	BEGIN=1;
-	#100 BEGIN=0;
-	repeat(20) @(posedge clk);
-	#25 BEGIN=1;
 	{w,x}=429;
 	y=13;
 	#100 BEGIN=0;
-	repeat(20) @(posedge clk);
-	/*#25 BEGIN=1;
-	x=109;
-	y=-67;
+	repeat(25) @(posedge clk);
+	#25 BEGIN=1;
+	{w,x}=3825;
+	y=72;
 	#100 BEGIN=0;
-	*/	
+	repeat(25) @(posedge clk);
+	#25 BEGIN=1;
+	{w,x}=987;
+	y=39;
+	#100 BEGIN=0;
+	repeat(25) @(posedge clk);
 end
 
 endmodule
