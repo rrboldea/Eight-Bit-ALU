@@ -7,6 +7,10 @@ set_global_assignment -name VERILOG_FILE modules/add_sub_1.v
 set_global_assignment -name VERILOG_FILE modules/ALU.v
 set_global_assignment -name VERILOG_FILE modules/br4_8bits_CU.v
 set_global_assignment -name VERILOG_FILE modules/br4_8bits.v
+set_global_assignment -name VERILOG_FILE modules/srtr4_8bits_CU.v
+set_global_assignment -name VERILOG_FILE modules/srtr4_8bits.v
+set_global_assignment -name VERILOG_FILE modules/srtr4_lookup_table.v
+set_global_assignment -name VERILOG_FILE modules/srtr4_reg.v
 set_global_assignment -name VERILOG_FILE modules/cla_4b_adder.v
 set_global_assignment -name VERILOG_FILE modules/cla_4b_carry.v
 set_global_assignment -name VERILOG_FILE modules/counter.v
@@ -17,8 +21,9 @@ set_global_assignment -name VERILOG_FILE modules/mux_1sel.v
 set_global_assignment -name VERILOG_FILE modules/RCA_adder.v
 set_global_assignment -name VERILOG_FILE modules/register.v
 set_global_assignment -name VERILOG_FILE modules/rshiftReg.v
+set_global_assignment -name VERILOG_FILE modules/lshiftReg.v
 
-set_global_assignment -name VERILOG_FILE modules/test_load_x_y.v
+set_global_assignment -name VERILOG_FILE modules/test_load_w_x_y.v
 set_global_assignment -name VERILOG_FILE pos_edge.v
 set_global_assignment -name VERILOG_FILE synchronizer.v
 set_global_assignment -name VERILOG_FILE test.v
@@ -28,13 +33,14 @@ set_global_assignment -name TOP_LEVEL_ENTITY test
 set_location_assignment PIN_P11 -to clk
 
 # on-board buttons
-set_location_assignment PIN_B8 -to ld_x_y_b
+set_location_assignment PIN_B8 -to ld_w_x_y_b
 set_location_assignment PIN_A7 -to rst_b
 
 # added buttons
 set_location_assignment -to ADD_b PIN_AA2
 set_location_assignment -to SUB_b PIN_AB2
 set_location_assignment -to MULT_b PIN_Y3
+set_location_assignment -to DIV_b PIN_AB3
 
 #set_location_assignment -to AND PIN_AB5
 #set_location_assignment -to OR PIN_AB6
