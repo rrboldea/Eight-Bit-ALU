@@ -5,7 +5,7 @@ module nrd8bits_CU (
     output done,
     output [6:0] c
 );
-    wire [6:0] state, next;
+    wire [7:0] state, next;
     wire cnt8 = (cnt == 4'd8);
     wire s0 = state[0];
     wire s1 = state[1];
@@ -14,20 +14,22 @@ module nrd8bits_CU (
     wire s4 = state[4];
     wire s5 = state[5];
     wire s6 = state[6];
+    wire s7 = state[7];
     assign next[0] = (s0 & ~start) | (s6 & ~start);
     assign next[1] = s0 & start;
     assign next[2] = s1 | (s4 & ~cnt8 & ~sign_A) | (s5 & ~cnt8);
     assign next[3] = s2;
     assign next[4] = s3;
     assign next[5] = s4 & sign_A & ~cnt8;
-    assign next[6] = (s6 & ~start) | (s4 & cnt8 & ~sign_A) | (s5 & cnt8);
+    assign next[6] = s7;
+    assign next[7] = (s4 & cnt8) | (s5 & cnt8);
     assign c[0] = s1;
     assign c[1] = s2;
     assign c[2] = s3 & ~sign_A;
     assign c[3] = s3 & sign_A;
     assign c[4] = s4 & ~sign_A;
     assign c[5] = s4 & sign_A;
-    assign c[6] = s5;
+    assign c[6] = s5 | (s7 & sign_A);
     assign done = s6;
     d_ff ff0 (
         .clk(clk),
@@ -40,7 +42,7 @@ module nrd8bits_CU (
     );
     genvar i;
     generate
-        for(i=1;i<=6;i=i+1) begin: FF
+        for(i=1;i<=7;i=i+1) begin: FF
             d_ff ff (
                 .clk(clk),
                 .rst_b(rst_b),
