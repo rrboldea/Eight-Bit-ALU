@@ -1,6 +1,6 @@
 # Eight-Bit ALU
 
-An 8-bit Arithmetic Logic Unit (ALU) implemented in Verilog and deployed on the **DE10-Lite FPGA board** (Intel MAX 10). The ALU supports **addition**, **subtraction**, and **multiplication** of two 8-bit operands, with the 16-bit result displayed on LEDs. The project was compiled using **Intel Quartus Prime**.
+An 8-bit Arithmetic Logic Unit (ALU) implemented in Verilog and deployed on the **DE10-Lite FPGA board** (Intel MAX 10). The ALU supports **addition**, **subtraction**, and **multiplication** of two 8-bit operands, with the 16-bit result displayed on LEDs.
 
 ---
 
@@ -120,18 +120,6 @@ Switches (data[7:0])
 ```
 
 ---
-
-## Building the Project
-
-### Using the TCL script (recommended)
-
-1. Open **Intel Quartus Prime**
-2. Go to **View > Tcl Console**
-3. Run:
-   ```tcl
-   source prj.tcl
-   ```
-   This will create the project, assign all source files and pin locations, and compile automatically.
 
 ### Manual setup
 
