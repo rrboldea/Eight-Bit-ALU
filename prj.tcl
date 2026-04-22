@@ -37,10 +37,10 @@ set_location_assignment PIN_B8 -to ld_w_x_y_b
 set_location_assignment PIN_A7 -to rst_b
 
 # added buttons
-set_location_assignment -to ADD_b PIN_AA2
-set_location_assignment -to SUB_b PIN_AB2
-set_location_assignment -to MULT_b PIN_Y3
-set_location_assignment -to DIV_b PIN_AB3
+set_location_assignment -to ADD_b PIN_W10
+set_location_assignment -to SUB_b PIN_V10
+set_location_assignment -to MULT_b PIN_W9
+set_location_assignment -to DIV_b PIN_V9
 
 #set_location_assignment -to AND PIN_AB5
 #set_location_assignment -to OR PIN_AB6
