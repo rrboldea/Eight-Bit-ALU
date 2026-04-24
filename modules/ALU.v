@@ -63,7 +63,7 @@ adder #(.size(8)) ADDER
 	.cout(cout)
 );
 
-br4_8bits MULTIPLIER
+br8_8bits MULTIPLIER
 (
 	.clk(clk),
 	.rst_b(rst_b),

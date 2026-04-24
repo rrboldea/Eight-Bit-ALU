@@ -1,5 +1,4 @@
-
-//general shift register, capable of loading and shifting data any amount 
+//general left shift register, capable of loading and shifting data any amount 
 //of bits
 
 module lshiftReg #(parameter bits_shift=2, parameter size=8)
