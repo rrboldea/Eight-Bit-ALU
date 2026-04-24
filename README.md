@@ -1,12 +1,13 @@
 # Eight-Bit ALU
 
-An 8-bit Arithmetic Logic Unit (ALU) implemented in Verilog and deployed on the **DE10-Lite FPGA board** (Intel MAX 10). The ALU supports **addition**, **subtraction**, and **multiplication** of two 8-bit operands, with the 16-bit result displayed on LEDs.
+An 8-bit Arithmetic Logic Unit (ALU) implemented in Verilog and deployed on the **DE10-Lite FPGA board** (Intel MAX 10). The ALU supports **addition**, **subtraction**, **multiplication**, and **division** of two 8-bit operands, with the 16-bit result displayed on LEDs.
+> **Note:** The `srt` branch — implementing the SRT (Sweeney-Robertson-Tocher) division algorithm — has been merged into `main`.
 
 ---
 
 ## Overview
 
-The top-level module (`test`) reads two 8-bit operands from on-board switches, loads them into registers X and Y via a button press, and then performs the selected arithmetic operation (ADD, SUB, or MULT) triggered by dedicated buttons. Button signals are debounced through synchronizer and positive-edge detector circuits before being passed to the ALU.
+The top-level module (`test`) reads two 8-bit operands from on-board switches, loads them into registers X and Y via a button press, and then performs the selected arithmetic operation (ADD, SUB, MULT, or DIV) triggered by dedicated buttons. Button signals are debounced through synchronizer and positive-edge detector circuits before being passed to the ALU.
 
 ---
 
@@ -15,7 +16,7 @@ The top-level module (`test`) reads two 8-bit operands from on-board switches, l
 ```
 Eight-Bit-ALU/
 ├── modules/
-│   ├── ALU.v               # Top-level ALU module (ADD, SUB, MULT)
+│   ├── ALU.v               # Top-level ALU module (ADD, SUB, MULT, DIV)
 │   ├── RCA_adder.v         # Ripple Carry Adder
 │   ├── ac.v                # Adder/carry component
 │   ├── add_sub_1.v         # Add/subtract by 1 unit
@@ -29,8 +30,8 @@ Eight-Bit-ALU/
 │   ├── fac.v               # Full adder cell
 │   ├── hac.v               # Half adder cell
 │   ├── mux_1sel.v          # 2-to-1 multiplexer
-│   ├── nrd8bits.v          # Non-restoring division (8-bit)
-│   ├── nrd8bits_CU.v       # Control unit for division
+│   ├── nrd8bits.v          # Non-restoring division / SRT division (8-bit)
+│   ├── nrd8bits_CU.v       # Control unit for SRT division
 │   ├── register.v          # General purpose register
 │   ├── rshiftReg.v         # Right shift register
 │   └── test_load_x_y.v     # Module to load X and Y operands
@@ -58,15 +59,16 @@ Eight-Bit-ALU/
 
 ## Operations
 
-The ALU performs three operations, each triggered by a dedicated external button:
+The ALU performs four operations, each triggered by a dedicated external button:
 
 | Operation      | Button  | Pin  | Output Width |
 |----------------|---------|------|--------------|
 | Addition       | ADD_b   | AA2  | 16-bit (q)   |
 | Subtraction    | SUB_b   | AB2  | 16-bit (q)   |
 | Multiplication | MULT_b  | Y3   | 16-bit (q)   |
+| Division       | DIV_b   | TBD  | 16-bit (q)   |
 
-Multiplication is implemented using the **Booth Radix-4** algorithm.
+Multiplication is implemented using the **Booth Radix-4** algorithm. Division is implemented using the **SRT (Sweeney-Robertson-Tocher)** algorithm.
 
 ---
 
@@ -96,7 +98,7 @@ Multiplication is implemented using the **Booth Radix-4** algorithm.
 ## How It Works
 
 1. **Load operands** — Set the desired 8-bit value on the switches, then press `ld_x_y_b`. The first press loads register **X**, the second press loads register **Y**.
-2. **Select operation** — Press `ADD_b`, `SUB_b`, or `MULT_b` to trigger the desired operation.
+2. **Select operation** — Press `ADD_b`, `SUB_b`, `MULT_b`, or `DIV_b` to trigger the desired operation.
 3. **Read result** — The 16-bit result appears on the output LEDs (`q[15:0]`). The `DONE` LED lights up when the operation is complete (relevant for multiplication).
 
 > **Note:** Buttons on the DE10-Lite are **active-low** (pulled HIGH). The `test` module inverts the signals internally. Each button signal passes through a **synchronizer** (to prevent metastability) and a **positive-edge detector** before reaching the ALU.
@@ -113,13 +115,15 @@ Switches (data[7:0])
    /          \
   X            Y
    \          /
-      ALU.v   <-- ADD / SUB / MULT (buttons, synced + edge-detected)
+      ALU.v   <-- ADD / SUB / MULT / DIV (buttons, synced + edge-detected)
         |
      q[15:0]  -->  LEDs
      DONE     -->  LED
 ```
 
 ---
+
+## Building the Project
 
 ### Manual setup
 
