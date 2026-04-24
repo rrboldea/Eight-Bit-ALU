@@ -24,9 +24,9 @@ set_global_assignment -name VERILOG_FILE modules/rshiftReg.v
 set_global_assignment -name VERILOG_FILE modules/lshiftReg.v
 
 set_global_assignment -name VERILOG_FILE modules/test_load_w_x_y.v
-set_global_assignment -name VERILOG_FILE pos_edge.v
-set_global_assignment -name VERILOG_FILE synchronizer.v
-set_global_assignment -name VERILOG_FILE test.v
+set_global_assignment -name VERILOG_FILE modules/pos_edge.v
+set_global_assignment -name VERILOG_FILE modules/synchronizer.v
+set_global_assignment -name VERILOG_FILE modules/test.v
 set_global_assignment -name TOP_LEVEL_ENTITY test
 
 # clock
