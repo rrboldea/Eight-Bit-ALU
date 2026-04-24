@@ -7,7 +7,7 @@ An 8-bit Arithmetic Logic Unit (ALU) implemented in Verilog and deployed on the 
 
 ## Overview
 
-The top-level module (`test`) reads two 8-bit operands from on-board switches, loads them into registers X and Y via a button press, and then performs the selected arithmetic operation (ADD, SUB, MULT, or DIV) triggered by dedicated buttons. Button signals are debounced through synchronizer and positive-edge detector circuits before being passed to the ALU.
+The top-level module (`test`) reads one 16-bit and one 8-bit operand from on-board switches, loads them into registers W, X and Y via a button press, and then performs the selected arithmetic operation (ADD, SUB, MULT, or DIV) triggered by dedicated buttons. Button signals are debounced through synchronizer and positive-edge detector circuits before being passed to the ALU.
 
 ---
 
@@ -34,7 +34,7 @@ Eight-Bit-ALU/
 │   ├── nrd8bits_CU.v       # Control unit for SRT division
 │   ├── register.v          # General purpose register
 │   ├── rshiftReg.v         # Right shift register
-│   └── test_load_x_y.v     # Module to load X and Y operands
+│   └── test_load_w_x_y.v     # Module to load X and Y operands
 ├── testbench/              # Testbenches for each module
 ├── test.v                  # Top-level test module for DE10-Lite
 ├── pos_edge.v              # Positive edge detector for button inputs
@@ -68,7 +68,7 @@ The ALU performs four operations, each triggered by a dedicated external button:
 | Multiplication | MULT_b  | Y3   | 16-bit (q)   |
 | Division       | DIV_b   | TBD  | 16-bit (q)   |
 
-Multiplication is implemented using the **Booth Radix-4** algorithm. Division is implemented using the **SRT (Sweeney-Robertson-Tocher)** algorithm.
+Multiplication is implemented using the **Booth Radix-4** algorithm. Division is implemented using the **SRT Radix-4 (Sweeney-Robertson-Tocher)** algorithm.
 
 ---
 
@@ -97,7 +97,7 @@ Multiplication is implemented using the **Booth Radix-4** algorithm. Division is
 
 ## How It Works
 
-1. **Load operands** — Set the desired 8-bit value on the switches, then press `ld_x_y_b`. The first press loads register **X**, the second press loads register **Y**.
+1. **Load operands** — Set the desired 8-bit value on the switches, then press `ld_w_x_y_b`. The first press loads register **W**, the second press loads register **X**, and the last one register **Y**
 2. **Select operation** — Press `ADD_b`, `SUB_b`, `MULT_b`, or `DIV_b` to trigger the desired operation.
 3. **Read result** — The 16-bit result appears on the output LEDs (`q[15:0]`). The `DONE` LED lights up when the operation is complete (relevant for multiplication).
 
@@ -111,7 +111,7 @@ Multiplication is implemented using the **Booth Radix-4** algorithm. Division is
 Switches (data[7:0])
         |
         v
-  test_load_x_y  <-- ld_x_y (button, synced + edge-detected)
+  test_load_w_x_y  <-- ld_w_x_y (button, synced + edge-detected)
    /          \
   X            Y
    \          /
@@ -127,11 +127,10 @@ Switches (data[7:0])
 
 ### Manual setup
 
-1. Create a new Quartus project targeting device `10M50DAF484C7G`
-2. Add all `.v` files from `modules/` and the root directory
-3. Set `test` as the top-level entity
-4. Import `ALU.sdc` for timing constraints
-5. Compile and program the DE10-Lite board
+1. Clone the repository
+2. run quartus_pgm -l to check if the intel de10 lite is connected
+3. Inside the folder, execute quartus_sh -t prj.tcl, in orfer to compile the design
+4. run quartus_sh to upload ALU.sof to the board 
 
 ---
 
