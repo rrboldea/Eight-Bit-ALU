@@ -21,14 +21,17 @@ Eight-Bit-ALU/
 │   ├── ac.v                # Adder/carry component
 │   ├── add_sub_1.v         # Add/subtract by 1 unit
 │   ├── adder.v             # General adder
-│   ├── br4_8bits.v         # Booth radix-4 multiplier (8-bit)
-│   ├── br4_8bits_CU.v      # Control unit for Booth multiplier
+│   ├── br4_8bits.v         # Booth radix-4 multiplier (8-bit) (legacy)
+│   ├── br4_8bits_CU.v      # Control unit for Booth radix-4 multiplier
+│   ├── br8_8bits.v         # Booth radix-8 multiplier (8-bit)
+│   ├── br8_8bits_CU.v      # Control unit for Booth radix-8 multiplier
 │   ├── cla_4b_adder.v      # Carry Lookahead Adder (4-bit)
 │   ├── cla_4b_carry.v      # CLA carry generator
 │   ├── counter.v           # Counter (used in multiplication FSM)
 │   ├── d_ff.v              # D flip-flop
 │   ├── fac.v               # Full adder cell
 │   ├── hac.v               # Half adder cell
+│   ├── lshiftReg.v         # Left shift register
 │   ├── mux_1sel.v          # 2-to-1 multiplexer
 │   ├── nrd8bits.v          # Non-restoring division / SRT division (8-bit)
 │   ├── nrd8bits_CU.v       # Control unit for SRT division
@@ -68,7 +71,7 @@ The ALU performs four operations, each triggered by a dedicated external button:
 | Multiplication | MULT_b  | Y3   | 16-bit (q)   |
 | Division       | DIV_b   | TBD  | 16-bit (q)   |
 
-Multiplication is implemented using the **Booth Radix-4** algorithm. Division is implemented using the **SRT Radix-4 (Sweeney-Robertson-Tocher)** algorithm.
+Multiplication is implemented using the **Booth Radix-8** algorithm (upgraded from Booth Radix-4). Division is implemented using the **SRT Radix-4 (Sweeney-Robertson-Tocher)** algorithm.
 
 ---
 
