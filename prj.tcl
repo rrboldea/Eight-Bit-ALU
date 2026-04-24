@@ -5,8 +5,8 @@ set_global_assignment -name VERILOG_FILE modules/ac.v
 set_global_assignment -name VERILOG_FILE modules/adder.v
 set_global_assignment -name VERILOG_FILE modules/add_sub_1.v
 set_global_assignment -name VERILOG_FILE modules/ALU.v
-set_global_assignment -name VERILOG_FILE modules/br4_8bits_CU.v
-set_global_assignment -name VERILOG_FILE modules/br4_8bits.v
+set_global_assignment -name VERILOG_FILE modules/br8_8bits_CU.v
+set_global_assignment -name VERILOG_FILE modules/br8_8bits.v
 set_global_assignment -name VERILOG_FILE modules/srtr4_8bits_CU.v
 set_global_assignment -name VERILOG_FILE modules/srtr4_8bits.v
 set_global_assignment -name VERILOG_FILE modules/srtr4_lookup_table.v
