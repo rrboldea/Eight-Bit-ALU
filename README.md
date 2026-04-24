@@ -34,11 +34,11 @@ Eight-Bit-ALU/
 │   ├── nrd8bits_CU.v       # Control unit for SRT division
 │   ├── register.v          # General purpose register
 │   ├── rshiftReg.v         # Right shift register
-│   └── test_load_w_x_y.v     # Module to load X and Y operands
+│   ├── test_load_w_x_y.v   # Module to load X and Y operands
+|   ├── pos_edge.v          # Positive edge detector for button inputs
+|   ├── synchronizer.v      # Button signal synchronizer (metastability)
+|   └── test.v              # Top-level test module for DE10-Lite
 ├── testbench/              # Testbenches for each module
-├── test.v                  # Top-level test module for DE10-Lite
-├── pos_edge.v              # Positive edge detector for button inputs
-├── synchronizer.v          # Button signal synchronizer (metastability)
 ├── ALU.sdc                 # Timing constraints (50 MHz clock, Terasic)
 └── prj.tcl                 # Quartus TCL project script
 ```
@@ -128,9 +128,10 @@ Switches (data[7:0])
 ### Manual setup
 
 1. Clone the repository
-2. run quartus_pgm -l to check if the intel de10 lite is connected
-3. Inside the folder, execute quartus_sh -t prj.tcl, in orfer to compile the design
-4. run quartus_pgm -m jtag -o "p;ALU.sof@1" to upload ALU.sof to the board 
+2. Connect the pins of the fpga to leds and buttons (connections can be seen in the prj.tcl)
+3. inside the folder, run quartus_pgm -l to check if the intel de10 lite is connected
+4. execute quartus_sh -t prj.tcl, in orfer to compile the design
+5. run quartus_pgm -m jtag -o "p;ALU.sof@1" to upload ALU.sof to the board 
 
 ---
 
