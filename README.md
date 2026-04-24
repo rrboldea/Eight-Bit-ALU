@@ -130,7 +130,7 @@ Switches (data[7:0])
 1. Clone the repository
 2. run quartus_pgm -l to check if the intel de10 lite is connected
 3. Inside the folder, execute quartus_sh -t prj.tcl, in orfer to compile the design
-4. run quartus_sh to upload ALU.sof to the board 
+4. run quartus_pgm -m jtag -o "p;ALU.sof@1" to upload ALU.sof to the board 
 
 ---
 
