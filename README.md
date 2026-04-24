@@ -2,7 +2,7 @@
 
 An 8-bit Arithmetic Logic Unit (ALU) implemented in Verilog and deployed on the **DE10-Lite FPGA board** (Intel MAX 10). The ALU supports **addition**, **subtraction**, **multiplication**, and **division** of two 8-bit operands, with the 16-bit result displayed on LEDs.
 > **Note:** The `srt` branch — implementing the SRT (Sweeney-Robertson-Tocher) division algorithm — has been merged into `main`.
-> **Note:** The `booth` branch — implementing the BOOTH Radix-4 multiplication algorithm — has been merged into `main`.
+> **Note:** The `booth` branch — implementing the BOOTH Radix-8 multiplication algorithm — has been merged into `main`.
 
 ---
 
