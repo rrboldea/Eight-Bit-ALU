@@ -84,10 +84,11 @@ Multiplication is implemented using the **Booth Radix-8** algorithm (upgraded fr
 |--------------|--------------------------------------|----------|
 | `clk`        | 50 MHz system clock                  | P11      |
 | `rst_b`      | Active-low reset (on-board button)   | A7       |
-| `ld_x_y_b`   | Load X/Y operands (on-board button)  | B8       |
-| `ADD_b`      | Trigger addition (external button)   | AA2      |
-| `SUB_b`      | Trigger subtraction (ext. button)    | AB2      |
-| `MULT_b`     | Trigger multiplication (ext. button) | Y3       |
+| `ld_w_x_y_b` | Load X/Y operands (on-board button)  | B8       |
+| `ADD_b`      | Trigger addition (external button)   | W10      |
+| `SUB_b`      | Trigger subtraction (ext. button)    | V10      |
+| `MULT_b`     | Trigger multiplication (ext. button) | W9       |
+| `DIV_b`      | Trigger multiplication (ext. button) | V9       |
 | `data[7:0]`  | 8-bit data input via switches        | C10–A14  |
 
 ### Outputs
